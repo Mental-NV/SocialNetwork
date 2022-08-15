@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   socialnetwork.portal:
-    image: ${DOCKER_REGISTRY-}socialnetwork.portal
+    image: mental001/socialnetwork.portal
     build:
       context: ../../
       dockerfile: src/WebApps/SocialNetwork.Portal/Dockerfile
