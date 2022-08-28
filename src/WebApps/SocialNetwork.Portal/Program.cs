@@ -18,7 +18,7 @@ namespace SocialNetwork.Portal
 
             app.MapGet("/", (HttpContext httpContext) =>
             {
-                return "SocialNetwork.Portal ";
+                return "SocialNetwork.Portal version AksDeploy";
             });
 
             app.Run();
