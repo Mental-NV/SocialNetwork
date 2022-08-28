@@ -36,6 +36,6 @@ jobs:
         with:
           action: deploy
           manifests: |
-              deployment/aks/portal.yaml
+              ./deployment/aks/portal.yaml
           images: |
               mental001/socialnetwork.portal:latest
