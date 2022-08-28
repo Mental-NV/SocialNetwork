@@ -10,6 +10,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the git repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       # Build image and deploy to Docker Hub
       - name: Login to DockerHub
         uses: docker/login-action@v2
@@ -27,8 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [docker]
     steps:
-      - uses: actions/checkout@master
-      - uses: azure/setup-kubectl@v2.0
+      - name: Checkout the git repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup KubeCtl
+        uses: azure/setup-kubectl@v2.0
 
       # Set the target AKS cluster.
       - uses: Azure/aks-set-context@v1
