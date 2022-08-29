@@ -25,7 +25,7 @@ jobs:
         with:
           file: ./src/WebApps/SocialNetwork.Portal/Dockerfile
           push: true
-          tags: mental001/socialnetwork.portal:latest
+          tags: mental001/socialnetwork.portal:${{ github.sha }}
 
   aks:
     runs-on: ubuntu-latest
@@ -49,4 +49,4 @@ jobs:
         with:
           action: deploy
           manifests: deployment/aks/portal.yaml
-          images: mental001/socialnetwork.portal:latest
+          images: mental001/socialnetwork.portal:${{ github.sha }}
