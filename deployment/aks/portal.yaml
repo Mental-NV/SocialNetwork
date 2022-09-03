@@ -26,18 +26,17 @@ spec:
           resources:
             limits:
               memory: "256Mi"
-              cpu: "500m"
+              cpu: "300m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: portal-service
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: MC_SocialNetwork_SocialNetworkCluster_northeurope
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: SocialNetwork
     service.beta.kubernetes.io/azure-dns-label-name: socialnetwork
 spec:
   type: LoadBalancer
-  loadBalancerIP: 20.234.92.2
   selector:
     app: portal
   ports:
