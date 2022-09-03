@@ -34,9 +34,9 @@ metadata:
   name: portal-service
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-resource-group: MC_SocialNetwork_SocialNetworkCluster_northeurope
+    service.beta.kubernetes.io/azure-dns-label-name: socialnetwork
 spec:
   type: LoadBalancer
-  loadBalancerIP: 13.69.215.70
   selector:
     app: portal
   ports:
