@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.Features;
+
 namespace SocialNetwork.Portal
 {
     public class Program
@@ -13,12 +15,12 @@ namespace SocialNetwork.Portal
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-
             app.UseAuthorization();
 
-            app.MapGet("/", (HttpContext httpContext) =>
+            app.MapGet("/", (HttpContext httpContext, IConfiguration configuration) =>
             {
-                return "SocialNetwork.Portal version DNS label";
+                string? hostName = configuration["HOSTNAME"];
+                return $"SocialNetwork.Portal. Pod hostname: {hostName}";
             });
 
             app.Run();
