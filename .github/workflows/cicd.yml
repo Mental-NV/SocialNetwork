@@ -1,4 +1,4 @@
-name: ci
+name: CI/CD
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
         with:
           file: ./src/WebApps/SocialNetwork.Portal/Dockerfile
           push: true
-          tags: mental001/socialnetwork.portal:${{ github.sha }}
+          tags: mental001/socialnetwork.portal:latest
 
   aks:
     runs-on: ubuntu-latest
@@ -68,4 +68,4 @@ jobs:
         with:
           action: deploy
           manifests: deployment/aks/portal.yaml
-          images: mental001/socialnetwork.portal:${{ github.sha }}
+          images: mental001/socialnetwork.portal:latest
