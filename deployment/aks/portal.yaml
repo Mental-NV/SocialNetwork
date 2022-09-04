@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: portal
-          image: mental001/socialnetwork.portal
-          imagePullPolicy: IfNotPresent
+          image: mental001/socialnetwork.portal:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
