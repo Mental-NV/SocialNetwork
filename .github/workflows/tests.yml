@@ -1,10 +1,13 @@
-name: build pipeline
+name: tests
 
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - 'main'
 
 jobs:
-  build:
 
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
