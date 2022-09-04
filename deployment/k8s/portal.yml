@@ -23,6 +23,12 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
+            - name: ASPNETCORE_URLS
+              value: "https://+:443;http://+:80"
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+              value: ""
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+              value: "/https/localhost.pfx"
           resources:
             requests:
               memory: "64Mi"
@@ -52,7 +58,13 @@ spec:
   selector:
     app: portal
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 8000
       targetPort: 80
       nodePort: 30000
+    - name: https
+      protocol: TCP
+      port: 8001
+      targetPort: 443
+      nodePort: 31000
