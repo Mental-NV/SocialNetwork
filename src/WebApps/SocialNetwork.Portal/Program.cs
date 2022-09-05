@@ -22,6 +22,11 @@ namespace SocialNetwork.Portal
                 return $"SocialNetwork.Portal. Use latest image. Pod hostname: {hostName}";
             });
 
+            app.MapGet("/.well-known/acme-challenge/MWpWlZKdpCFBIQY88rwW1SDZclVJb1OTsYQM8Pb6bwY", () =>
+            {
+                return "MWpWlZKdpCFBIQY88rwW1SDZclVJb1OTsYQM8Pb6bwY.QW_WgChS-Jy0OazS-HA49AoTpScnZpEFNVj4JBlJCns";
+            });
+
             app.Run();
         }
     }
