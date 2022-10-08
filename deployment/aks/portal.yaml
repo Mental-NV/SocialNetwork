@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: portal
@@ -51,7 +51,7 @@ metadata:
     service.beta.kubernetes.io/azure-dns-label-name: socialnetwork
 spec:
   type: LoadBalancer
-  loadBalancerIP: 20.107.187.197
+  # loadBalancerIP: 20.107.187.197
   selector:
     app: portal
   ports:
