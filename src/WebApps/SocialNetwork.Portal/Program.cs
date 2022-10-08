@@ -19,7 +19,7 @@ namespace SocialNetwork.Portal
             app.MapGet("/", (HttpContext httpContext, IConfiguration configuration) =>
             {
                 string? hostName = configuration["HOSTNAME"];
-                return $"SocialNetwork.Portal. Use latest image. Pod hostname: {hostName}";
+                return $"SocialNetwork.Portal. Redeploy with a new subsciprtion. Pod hostname: {hostName}";
             });
 
             app.MapGet("/.well-known/acme-challenge/MWpWlZKdpCFBIQY88rwW1SDZclVJb1OTsYQM8Pb6bwY", () =>
