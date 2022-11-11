@@ -15,6 +15,7 @@ namespace SocialNetwork.Portal
 
             // Configure the HTTP request pipeline.
             app.UseAuthorization();
+            app.UseHttpsRedirection();
 
             app.MapGet("/", (HttpContext httpContext, IConfiguration configuration) =>
             {

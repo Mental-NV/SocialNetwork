@@ -9,6 +9,7 @@
     <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <BaseOutputPath>$(ProjectDir)bin\</BaseOutputPath>
     <BaseIntermediateOutputPath>$(ProjectDir)obj\</BaseIntermediateOutputPath>
+	<StaticWebAssetsEnabled>false</StaticWebAssetsEnabled>
   </PropertyGroup>
 
   <ItemGroup>
