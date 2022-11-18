@@ -17,9 +17,9 @@ namespace SocialNetwork.Portal
             app.UseAuthorization();
             app.UseHttpsRedirection();
 
-            app.MapGet("/", (HttpContext httpContext, IConfiguration configuration) =>
+            app.MapGet("/", (IConfiguration configuration) =>
             {
-                string? hostName = configuration["HOSTNAME"];
+                string hostName = configuration["HOSTNAME"];
                 return $"SocialNetwork.Portal. Renewed SSL certificate. Pod hostname: {hostName}";
             });
 
