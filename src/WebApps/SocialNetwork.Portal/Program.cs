@@ -1,3 +1,5 @@
+using SocialNetwork.Portal.Middlewares;
+
 namespace SocialNetwork.Portal;
 
 public class Program
@@ -11,6 +13,8 @@ public class Program
         builder.Services.AddControllersWithViews();
 
         var app = builder.Build();
+
+        app.UseLetsencryptChallenge();
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -28,11 +32,6 @@ public class Program
         app.UseRouting();
 
         app.UseAuthorization();
-
-        app.MapGet("/.well-known/acme-challenge/6-HJofuQIiI-uPZC8td1XS4-6mCLPLGhg7Oj7ei6UiA", () =>
-        {
-            return "6-HJofuQIiI-uPZC8td1XS4-6mCLPLGhg7Oj7ei6UiA.QW_WgChS-Jy0OazS-HA49AoTpScnZpEFNVj4JBlJCns";
-        });
 
         app.MapControllerRoute(
             name: "default",
