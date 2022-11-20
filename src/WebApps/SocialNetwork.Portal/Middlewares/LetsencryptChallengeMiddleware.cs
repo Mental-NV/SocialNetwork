@@ -9,13 +9,24 @@ public class LetsencryptChallengeMiddleware
         this.next = next;
     }
 
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, IConfiguration configuration)
     {
+        string path = configuration["LetscryptChallendge:Path"];
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            throw new ApplicationException("Configuration 'LetscryptChallendge:Path' cannot be empty");
+        }
+        string content = configuration["LetscryptChallendge:Content"];
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            throw new ApplicationException("Configuration 'LetscryptChallendge:Content' cannot be empty");
+        }
+
         if (!context.Request.IsHttps && string.Equals(context.Request.Method, "GET", StringComparison.InvariantCultureIgnoreCase))
         {
-            if (context.Request.Path == "/.well-known/acme-challenge/6-HJofuQIiI-uPZC8td1XS4-6mCLPLGhg7Oj7ei6UiA")
+            if (context.Request.Path == path)
             {
-                await context.Response.WriteAsync("6-HJofuQIiI-uPZC8td1XS4-6mCLPLGhg7Oj7ei6UiA.QW_WgChS-Jy0OazS-HA49AoTpScnZpEFNVj4JBlJCns");
+                await context.Response.WriteAsync(content);
                 return;
             }
         }

@@ -24,7 +24,7 @@ public class Program
 
         app.UseAuthorization();
 
-        // app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
         app.UseStaticFiles();
 
         app.UseRouting();
