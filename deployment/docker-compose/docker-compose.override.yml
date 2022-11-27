@@ -3,6 +3,13 @@ version: '3.4'
 services:
   socialnetwork.portal:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
     ports:
       - "8000:80"
+      - "8001:443"
+
+  socialnetwork.profile.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8002:80"

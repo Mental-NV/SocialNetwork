@@ -6,3 +6,9 @@ services:
     build:
       context: ../../
       dockerfile: src/WebApps/SocialNetwork.Portal/Dockerfile
+
+  socialnetwork.profile.api:
+    image: mental001/socialnetwork.profile.api
+    build:
+      context: ../..
+      dockerfile: src/Services/Profile/SocialNetwork.Profile.API/Dockerfile
