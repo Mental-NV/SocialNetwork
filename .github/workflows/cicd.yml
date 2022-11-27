@@ -39,7 +39,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push Portal
         uses: docker/build-push-action@v3
         with:
           file: ./src/WebApps/SocialNetwork.Portal/Dockerfile
@@ -47,6 +47,14 @@ jobs:
           tags: |
             mental001/socialnetwork.portal:latest
             mental001/socialnetwork.portal:${{ github.sha }}
+      - name: Build and push Profile
+        uses: docker/build-push-action@v3
+        with:
+          file: ./src/Services/Profile/SocialNetwork.Profile.API/Dockerfile
+          push: true
+          tags: |
+            mental001/socialnetwork.profile.api:latest
+            mental001/socialnetwork.profile.api:${{ github.sha }}
 
   aks:
     runs-on: ubuntu-latest
@@ -66,8 +74,16 @@ jobs:
           cluster-name: SocialNetworkCluster
           resource-group: SocialNetwork
 
+      # Deploy Portal
       - uses: Azure/k8s-deploy@v3.1
         with:
           action: deploy
           manifests: deployment/aks/portal.yaml
           images: mental001/socialnetwork.portal:${{ github.sha }}
+
+      # Deploy Profile
+      - uses: Azure/k8s-deploy@v3.1
+        with:
+          action: deploy
+          manifests: deployment/aks/profile.yaml
+          images: mental001/socialnetwork.profile.api:${{ github.sha }}
