@@ -1,4 +1,10 @@
-﻿namespace SocialNetwork.Profile.API.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SocialNetwork.Profile.Domain.Models
 {
     public class ProfileData
     {
@@ -8,6 +14,6 @@
         public DateTime Birthday { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public int Id { get; internal set; }
+        public int Id { get; set; }
     }
 }

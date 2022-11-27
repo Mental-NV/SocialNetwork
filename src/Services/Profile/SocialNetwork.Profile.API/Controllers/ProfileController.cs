@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Profile.API.Models;
+using SocialNetwork.Profile.Domain.Models;
 
 namespace SocialNetwork.Profile.API.Controllers
 {
