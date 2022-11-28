@@ -1,3 +1,4 @@
+using SocialNetwork.Portal.ApiServices;
 using SocialNetwork.Portal.Middlewares;
 
 namespace SocialNetwork.Portal;
@@ -9,8 +10,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddAuthorization();
-        builder.Services.AddControllersWithViews();
+        var services = builder.Services;
+        services
+            .AddAuthorization()
+            .AddControllersWithViews()
+            .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+        services.AddHttpClient();
+        services.AddScoped<IProfileApiService, ProfileApiService>();
 
         var app = builder.Build();
 
