@@ -18,13 +18,21 @@ namespace SocialNetwork.Profile.API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI();
 
+            app.UseRouting();
             app.UseAuthorization();
 
-
             app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("SocialNetwork.Profile.API");
+                });
+            });
 
             app.Run();
         }

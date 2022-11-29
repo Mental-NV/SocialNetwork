@@ -20,13 +20,8 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseDeveloperExceptionPage();
         app.UseLetsencryptChallenge();
-
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
-        {
-            app.UseExceptionHandler("/Home/Error");
-        }
 
         app.UseAuthorization();
 
