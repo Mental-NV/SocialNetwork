@@ -52,6 +52,7 @@ metadata:
     service.beta.kubernetes.io/azure-dns-label-name: socialnetwork
 spec:
   type: LoadBalancer
+  loadBalancerIP: 20.234.35.158
   selector:
     app: portal
   ports:
