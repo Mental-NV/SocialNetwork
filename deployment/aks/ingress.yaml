@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portal-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  labels:
+    name: portal-ingress
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: portal-service
+      port:
+        name: http
+  rules:
+  - host: socialnetwork.northeurope.cloudapp.azure.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: portal-service
+            port: 
+              name: http
+      - path: /profile
+        pathType: Prefix
+        backend:
+          service:
+            name: profile-service
+            port:
+              name: http
