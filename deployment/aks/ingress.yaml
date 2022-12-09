@@ -4,10 +4,15 @@ metadata:
   name: portal-ingress
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: letsencrypt
   labels:
     name: portal-ingress
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+    - socialnetwork.northeurope.cloudapp.azure.com
+    secretName: tls-secret
   defaultBackend:
     service:
       name: portal-service
@@ -31,3 +36,22 @@ spec:
             name: profile-service
             port:
               name: http
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: ruslan.galiev@outlook.com
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+          podTemplate:
+            spec:
+              nodeSelector:
+                "kubernetes.io/os": linux
