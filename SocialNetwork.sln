@@ -9,7 +9,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "deploymen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Profile.API", "src\Services\Profile\SocialNetwork.Profile.API\SocialNetwork.Profile.API.csproj", "{9507C93D-0E32-45EF-9C9D-0F4A27725AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Profile.Domain", "src\Services\Profile\SocialNetwork.Profile.Domain\SocialNetwork.Profile.Domain.csproj", "{98295951-0FC5-420A-8437-D37FED4F376A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Profile.Domain", "src\Services\Profile\SocialNetwork.Profile.Domain\SocialNetwork.Profile.Domain.csproj", "{98295951-0FC5-420A-8437-D37FED4F376A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.IdentityServer", "src\WebApps\SocialNetwork.IdentityServer\SocialNetwork.IdentityServer.csproj", "{EBC4124A-434E-4072-B0DE-9C0D476923EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{98295951-0FC5-420A-8437-D37FED4F376A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98295951-0FC5-420A-8437-D37FED4F376A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98295951-0FC5-420A-8437-D37FED4F376A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC4124A-434E-4072-B0DE-9C0D476923EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC4124A-434E-4072-B0DE-9C0D476923EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC4124A-434E-4072-B0DE-9C0D476923EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC4124A-434E-4072-B0DE-9C0D476923EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

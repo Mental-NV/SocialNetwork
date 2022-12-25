@@ -10,5 +10,11 @@ services:
   socialnetwork.profile.api:
     image: mental001/socialnetwork.profile.api
     build:
-      context: ../..
+      context: ../../
       dockerfile: src/Services/Profile/SocialNetwork.Profile.API/Dockerfile
+
+  socialnetwork.identityserver:
+    image: mental001/socialnetwork.identityserver
+    build:
+      context: ../../
+      dockerfile: src/WebApps/SocialNetwork.IdentityServer/Dockerfile

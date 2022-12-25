@@ -13,3 +13,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "8002:80"
+
+  socialnetwork.identityserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8843:80"
