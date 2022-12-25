@@ -37,11 +37,6 @@ public class Program
 
         app.UseAuthorization();
 
-        if (!string.IsNullOrWhiteSpace(builder.Configuration["https_port"]))
-        {
-            app.UseHttpsRedirection();
-        }
-
         app.UseStaticFiles();
 
         app.UseRouting();
