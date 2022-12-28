@@ -7,6 +7,13 @@
 
     <title>IdentityServer4</title>
     
+    @using Microsoft.Extensions.Configuration
+    @inject IConfiguration Configuration
+    @if (!string.IsNullOrWhiteSpace(@Configuration["BasePath"]))
+    {
+        <base href="@Configuration["BasePath"]">
+    }
+
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
     

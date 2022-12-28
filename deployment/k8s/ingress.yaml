@@ -35,3 +35,11 @@ spec:
             name: profile-service
             port:
               name: http
+      - path: /identityserver
+        pathType: Prefix
+        backend:
+          service:
+            name: identityserver-service
+            port:
+              name: http
+

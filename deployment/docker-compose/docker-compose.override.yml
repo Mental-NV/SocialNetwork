@@ -18,4 +18,5 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
     ports:
-      - "8843:80"
+      - "8843:443"
+      - "8003:80"
