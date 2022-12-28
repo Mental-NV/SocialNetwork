@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identityserver-deployment
+  labels:
+    app: identityserver
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: identityserver
+  template:
+    metadata:
+      labels:
+        app: identityserver
+    spec:
+      containers:
+      - name: identityserver
+        image: mental001/socialnetwork.identityserver:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+            - name: ASPNETCORE_URLS
+              value: "https://+:443;http://+:80"
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+              value: "123"
+            - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+              value: "/https/aspnetapp.pfx"
+        resources:
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
+        volumeMounts:
+          - mountPath: /https
+            name: portal-ssl-certificate
+      volumes:
+        - name: portal-ssl-certificate
+          secret:
+            secretName: portal-ssl-certificate
+            defaultMode: 0444
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: identityserver-service
+spec:
+  type: ClusterIP
+  selector:
+    app: identityserver
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+    - name: https
+      protocol: TCP
+      port: 443
+
