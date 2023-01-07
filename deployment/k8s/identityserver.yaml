@@ -30,6 +30,11 @@ spec:
               value: "123"
             - name: ASPNETCORE_Kestrel__Certificates__Default__Path
               value: "/https/localhost.pfx"
+            - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: local-app-insights-secret
+                  key: APPLICATIONINSIGHTS_CONNECTION_STRING
         resources:
             requests:
               memory: "64Mi"

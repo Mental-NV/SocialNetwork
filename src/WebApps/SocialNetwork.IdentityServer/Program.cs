@@ -16,7 +16,12 @@ namespace SocialNetwork.IdentityServer
                 //.AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddTestUsers(TestUsers.Users)
                 .AddDeveloperSigningCredential();
-            
+
+            if (!string.IsNullOrWhiteSpace(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
+            {
+                builder.Services.AddApplicationInsightsTelemetry();
+            }
+
             var app = builder.Build();
 
             ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
