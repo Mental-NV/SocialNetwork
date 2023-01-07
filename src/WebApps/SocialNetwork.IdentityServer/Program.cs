@@ -16,17 +16,7 @@ namespace SocialNetwork.IdentityServer
                 //.AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddTestUsers(TestUsers.Users)
                 .AddDeveloperSigningCredential();
-
-            builder.Services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-                options.Secure = CookieSecurePolicy.SameAsRequest;
-                options.OnAppendCookie = cookieContext =>
-                    AuthenticationHelpers.CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-                options.OnDeleteCookie = cookieContext =>
-                    AuthenticationHelpers.CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-            });
-
+            
             var app = builder.Build();
 
             ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
@@ -37,6 +27,11 @@ namespace SocialNetwork.IdentityServer
             {
                 app.UsePathBase(basePath);
             }
+
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.Lax
+            });
 
             app.UseStaticFiles();
             app.UseRouting();
@@ -63,20 +58,5 @@ namespace SocialNetwork.IdentityServer
             */
             app.Run();
         }
-    }
-
-    public static class AuthenticationHelpers
-    {
-        public static void CheckSameSite(HttpContext httpContext, CookieOptions options)
-        {
-            if (options.SameSite != SameSiteMode.None)
-                return;
-            string userAgent = httpContext.Request.Headers["User-Agent"].ToString();
-            if (httpContext.Request.IsHttps && !AuthenticationHelpers.DisallowsSameSiteNone(userAgent))
-                return;
-            options.SameSite = SameSiteMode.Unspecified;
-        }
-
-        public static bool DisallowsSameSiteNone(string userAgent) => userAgent.Contains("CPU iPhone OS 12") || userAgent.Contains("iPad; CPU OS 12") || userAgent.Contains("Macintosh; Intel Mac OS X 10_14") && userAgent.Contains("Version/") && userAgent.Contains("Safari") || userAgent.Contains("Chrome/5") || userAgent.Contains("Chrome/6");
     }
 }
