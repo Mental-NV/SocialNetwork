@@ -47,8 +47,8 @@ jobs:
           tags: |
             mental001/socialnetwork.portal:latest
             mental001/socialnetwork.portal:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=mental001/socialnetwork.portal:latest
+          cache-to: type=inline
       # Build Profile image
       - name: Build and push Profile
         uses: docker/build-push-action@v3
@@ -58,8 +58,8 @@ jobs:
           tags: |
             mental001/socialnetwork.profile.api:latest
             mental001/socialnetwork.profile.api:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=mental001/socialnetwork.profile.api:latest
+          cache-to: type=inline
       # Build IdentityServer image
       - name: Build and push IdentityServer
         uses: docker/build-push-action@v3
@@ -69,8 +69,8 @@ jobs:
           tags: |
             mental001/socialnetwork.identityserver:latest
             mental001/socialnetwork.identityserver:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=mental001/socialnetwork.identityserver:latest
+          cache-to: type=inline
 
   aks:
     runs-on: ubuntu-latest
