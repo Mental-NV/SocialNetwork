@@ -18,13 +18,13 @@ namespace IdentityServerHost.Quickstart.UI
     {
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IWebHostEnvironment _environment;
-        private readonly ILogger _logger;
+        private readonly ILogger logger;
 
         public HomeController(IIdentityServerInteractionService interaction, IWebHostEnvironment environment, ILogger<HomeController> logger)
         {
             _interaction = interaction;
             _environment = environment;
-            _logger = logger;
+            this.logger = logger;
         }
 
         public IActionResult Index()
@@ -51,6 +51,7 @@ namespace IdentityServerHost.Quickstart.UI
             if (message != null)
             {
                 vm.Error = message;
+                logger.LogError("Got error in HomeController: {message}, description: {description}", message, message.ErrorDescription);
 
                 /*if (!_environment.IsDevelopment())
                 {
