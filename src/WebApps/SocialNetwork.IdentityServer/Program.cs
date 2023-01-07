@@ -33,6 +33,7 @@ namespace SocialNetwork.IdentityServer
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
 
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseRouting();
 
