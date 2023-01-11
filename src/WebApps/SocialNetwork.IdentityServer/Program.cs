@@ -11,9 +11,9 @@ namespace SocialNetwork.IdentityServer
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddIdentityServer()
-                .AddInMemoryClients(Config.Clients)
+                .AddInMemoryClients(Config.GetClients(builder.Configuration))
                 .AddInMemoryApiScopes(Config.ApiScopes)
-                //.AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddTestUsers(TestUsers.Users)
                 .AddDeveloperSigningCredential();
 
@@ -51,17 +51,6 @@ namespace SocialNetwork.IdentityServer
                 endpoints.MapDefaultControllerRoute();
             });
 
-            /*app.MapGet("/api1", (HttpContext ctx, LinkGenerator link)
-                    => $"API1: PathBase: {ctx.Request.PathBase} Path: {ctx.Request.Path} Link: {link.GetPathByName(ctx, "api2", values: null)}")
-                .WithName("api1");
-
-            app.MapGet("/api2", (HttpContext ctx, LinkGenerator link)
-                    => $"API2: PathBase: {ctx.Request.PathBase} Path: {ctx.Request.Path} Link: {link.GetPathByName(ctx, "api1", values: null)}")
-                .WithName("api2");
-
-            app.MapFallback((HttpContext ctx, LinkGenerator link)
-                    => $"FALLBACK: PathBase: {ctx.Request.PathBase} Path: {ctx.Request.Path} Link: {link.GetPathByName(ctx, "api1", values: null)}");
-            */
             app.Run();
         }
     }

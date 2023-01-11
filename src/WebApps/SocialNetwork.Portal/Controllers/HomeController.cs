@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Portal.ApiServices;
 using SocialNetwork.Portal.Models;
@@ -6,6 +7,7 @@ using SocialNetwork.Profile.Domain.Models;
 
 namespace SocialNetwork.Portal.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

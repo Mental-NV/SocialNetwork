@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using SocialNetwork.Portal.ApiServices;
 using SocialNetwork.Portal.Middlewares;
+using IdentityModel;
 
 namespace SocialNetwork.Portal;
 
@@ -12,6 +17,31 @@ public class Program
 
         // Add services to the container.
         var services = builder.Services;
+
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+        })
+        .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+        {
+            options.Authority = builder.Configuration["IdentityServer:Authority"];
+            options.ClientId = "SocialNetwork.Portal";
+            options.ClientSecret = "secret";
+            options.ResponseType = "code";
+            options.Scope.Add("openid");
+            options.Scope.Add("profile");
+            options.Scope.Add("address");
+            options.Scope.Add("email");
+            options.Scope.Add("SocialNetworkAPI");
+            options.Scope.Add("roles");
+            options.ClaimActions.MapUniqueJsonKey("role", "role");
+            options.ClaimActions.MapUniqueJsonKey("address", "address");
+            options.SaveTokens = true;
+            options.GetClaimsFromUserInfoEndpoint = true;
+        });
+
         services
             .AddAuthorization()
             .AddControllersWithViews()
@@ -35,12 +65,10 @@ public class Program
         app.UseDeveloperExceptionPage();
         app.UseLetsencryptChallenge();
 
-        app.UseAuthorization();
-
         app.UseStaticFiles();
-
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

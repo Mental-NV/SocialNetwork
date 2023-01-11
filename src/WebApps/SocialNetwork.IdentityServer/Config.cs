@@ -8,8 +8,9 @@ namespace SocialNetwork.IdentityServer
 {
     public class Config
     {
-        public static IEnumerable<Client> Clients =>
-            new Client[]
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
+        {
+            return new Client[]
             {
                 new Client
                 {
@@ -21,20 +22,19 @@ namespace SocialNetwork.IdentityServer
                     },
                     AllowedScopes = { "SocialNetworkAPI" }
                 },
-                /* new Client
+                new Client
                 {
-                    ClientId = "movies_mvc_client",
-                    ClientName = "Movies MVC Web App",
-                    AllowedGrantTypes= GrantTypes.Hybrid,
-                    RequirePkce = false,
+                    ClientId = "SocialNetwork.Portal",
+                    ClientName = "SocialNetwork Portal Client",
+                    AllowedGrantTypes= GrantTypes.Code,
                     AllowRememberConsent = false,
                     RedirectUris = new List<string>()
                     {
-                        "https://localhost:5002/signin-oidc"
+                        configuration["SocialNetwork.Portal:RedirectUris"]
                     },
                     PostLogoutRedirectUris = new List<string>()
                     {
-                        "https://localhost:5002/signout-callback-oidc"
+                        configuration["SocialNetwork.Portal:PostLogoutRedirectUris"]
                     },
                     ClientSecrets = new List<Secret>
                     {
@@ -46,11 +46,12 @@ namespace SocialNetwork.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Address,
                         IdentityServerConstants.StandardScopes.Email,
-                        "movieAPI",
+                        "SocialNetworkAPI",
                         "roles"
                     }
-                }*/
+                }
             };
+        }
 
         public static IEnumerable<ApiScope> ApiScopes =>
            new ApiScope[]
